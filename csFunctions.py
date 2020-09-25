@@ -11,11 +11,11 @@ def right(s, length):
   return s[-length:]
 
 def mid(s, start, length):
-  return s[start-1:start+length]
+  return s[start-1:start+length-1]
 
 if __name__ == "__main__":
   x="abcdef"
-  print(left(x,2000))
-  print(right(x,2000))
-  print(mid(x,2,1000))
-  print(inString(x,"b"))
+  print(left(x,2) == "ab")
+  print(right(x,3) == "def")
+  print(mid(x,2,3) == "bcd")
+  print(inString(x,"b") == 2)
