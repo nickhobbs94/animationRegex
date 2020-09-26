@@ -38,3 +38,6 @@ if __name__ == "__main__":
   # but what if we wanted to return group 1 from the above?
   # then we'd need something like
   print(iif(inString(x, 'ac')>0, 'a', iif(inString(x, 'bc')>0, 'b', '')))
+
+  # use eval to actually evaluate animations
+  print(eval("left('abc',2)"))
