@@ -34,16 +34,21 @@ availableAnimationFunctions = {
   'str': str,
 }
 
-if __name__ == "__main__":
-  x="abcdef"
-  print(left(x,2) == "ab")
-  print(right(x,3) == "def")
-  print(mid(x,2,3) == "bcd")
-  print(instring(x,"b") == 2)
-  print(instring(x, 'it was the best of times it was the blurst of times') == 0)
-  print(iif(mid(x,2,3) == "bcd", left(x,1),right(x,1)) + '...')
-  print(lookup(1, 'x', 'y', 'z'))
+def evalAnimation(animationString, params={}, points={}):
+  for p in params:
+    animationString = animationString.replace('\"Parameter:'+p+'\"', params[p])
+    print(animationString)
 
+  for p in points:
+    animationString = animationString.replace('\"'+p+'\"', points[p])
+    print(animationString)
+
+  animationString = animationString.lower()
+  animationString = animationString.replace('=', '==')
+
+  return(eval(animationString, availableAnimationFunctions))
+
+if __name__ == "__main__":
   # example regex
   # (a|b)c
   # example animation
@@ -54,3 +59,9 @@ if __name__ == "__main__":
 
   # use eval to actually evaluate animations
   print(eval("left('abc',2) + str(len('abc'))", availableAnimationFunctions))
+
+  print(evalAnimation(
+    "IIF( ( \"Parameter:AlarmCount\" = '' ), 14935011, IIF( \"Parameter:AlarmCount\" * 1 < \"..Target Alarms Per Hour\", 14935011, 7430868 ) )",
+    params={'AlarmCount':'50'},
+    points={'..Target Alarms Per Hour':'8'}
+    ))
